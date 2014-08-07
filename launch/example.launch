@@ -1,0 +1,8 @@
+<launch>
+ 	<node pkg="ply_publisher" type="ply_publisher" name="ply_publisher" output="screen">
+ 		 <param name="file_path" value="/home/user/your_point_cloud.ply" />
+ 		 <param name="topic" value="/point_cloud" />
+ 		 <param name="frame" value="/sensor_frame" />
+ 		 <param name="rate" value="1.0" />
+    </node>
+</launch>
