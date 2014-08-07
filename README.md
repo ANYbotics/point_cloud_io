@@ -21,7 +21,7 @@ Installation
 
 This software is built on the Robotic Operating System ([ROS]), which needs to be [installed](http://wiki.ros.org) first. Additionaly, the it depends on following software:
 
-- [Point Cloud Library (PCL)](http://pointclouds.org/) (point cloud processing).
+- [Point Cloud Library (PCL)](http://pointclouds.org/).
 
 
 ### Building
