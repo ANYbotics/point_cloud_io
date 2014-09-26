@@ -12,7 +12,7 @@
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
 #include <pcl/io/ply_io.h>
-#include <pcl/ros/conversions.h>
+#include <pcl_conversions/pcl_conversions.h>
 
 using namespace std;
 using namespace ros;
