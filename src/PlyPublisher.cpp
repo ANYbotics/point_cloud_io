@@ -102,8 +102,11 @@ void PlyPublisher::timerCallback(const ros::TimerEvent& timerEvent)
 bool PlyPublisher::publish()
 {
   pointCloudMessage_->header.stamp = Time::now();
-  pointCloudPublisher_.publish(pointCloudMessage_);
-  ROS_INFO_STREAM("Point cloud published in topic \"" << pointCloudTopic_ << "\".");
+  if(pointCloudPublisher_.getNumSubscribers() > 0u)
+  {
+    pointCloudPublisher_.publish(pointCloudMessage_);
+    ROS_INFO_STREAM("Point cloud published in topic \"" << pointCloudTopic_ << "\".");
+  }
   return true;
 }
 
