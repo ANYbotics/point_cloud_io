@@ -13,11 +13,15 @@
 #include <pcl/point_types.h>
 #include <pcl/io/ply_io.h>
 #include <pcl_conversions/pcl_conversions.h>
+// define the following in order to eliminate the deprecated headers warning
+#define VTK_EXCLUDE_STRSTREAM_HEADERS
+#include <pcl/io/vtk_lib_io.h>
 
 using namespace std;
 using namespace ros;
 using namespace pcl;
 using namespace pcl::io;
+using namespace pcl_conversions;
 
 namespace ply_publisher {
 
@@ -82,15 +86,26 @@ void PlyPublisher::initialize()
 
 bool PlyPublisher::readFile(const std::string& filePath, const std::string& pointCloudFrameId)
 {
-  // Load .ply file.
-  PointCloud<pcl::PointXYZ> pointCloud;
-  if (loadPLYFile(filePath, pointCloud) != 0) return false;
+  if (filePath.find(".ply") != std::string::npos) {
+    // Load .ply file.
+    PointCloud<PointXYZ> pointCloud;
+    if (loadPLYFile(filePath, pointCloud) != 0) return false;
 
-  // Define PointCloud2 message.
-  toROSMsg(pointCloud, *pointCloudMessage_);
+    // Define PointCloud2 message.
+    toROSMsg(pointCloud, *pointCloudMessage_);
+  }
+  if (filePath.find(".vtk") != std::string::npos) {
+    // Load .vtk file.
+    PolygonMesh polygonMesh;
+    loadPolygonFileVTK(filePath, polygonMesh);
+
+    // Define PointCloud2 message.
+    moveFromPCL(polygonMesh.cloud, *pointCloudMessage_);
+  }
+
   pointCloudMessage_->header.frame_id = pointCloudFrameId;
 
-  ROS_INFO_STREAM("Loaded point cloud with " << pointCloud.size() << " points.");
+  ROS_INFO_STREAM("Loaded point cloud with " << pointCloudMessage_->width << " points.");
   return true;
 }
 
