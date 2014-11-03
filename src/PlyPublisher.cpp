@@ -42,7 +42,7 @@ PlyPublisher::~PlyPublisher()
 bool PlyPublisher::readParameters()
 {
   bool allParametersRead = true;
-  if (!nodeHandle_.getParam("file_path", plyFilePath_)) allParametersRead = false;
+  if (!nodeHandle_.getParam("file_path", filePath_)) allParametersRead = false;
   if (!nodeHandle_.getParam("topic", pointCloudTopic_)) allParametersRead = false;
   if (!nodeHandle_.getParam("frame", pointCloudFrameId_)) allParametersRead = false;
 
@@ -61,7 +61,7 @@ bool PlyPublisher::readParameters()
   if (!allParametersRead)
   {
     ROS_WARN("Could not read all parameters. Typical command-line usage:\n rosrun ply_publisher ply_publisher"
-        " _file_path:=path_to_your_ply_file _topic:=your_topic _frame:=/point_cloud_frame");
+        " _file_path:=path_to_your_point_cloud_file _topic:=your_topic _frame:=/point_cloud_frame");
     return false;
   }
 
@@ -70,7 +70,7 @@ bool PlyPublisher::readParameters()
 
 void PlyPublisher::initialize()
 {
-  readFile(plyFilePath_, pointCloudFrameId_);
+  if (!readFile(filePath_, pointCloudFrameId_)) ros::requestShutdown();
 
   if (isContinousPublishing_)
   {
@@ -79,7 +79,7 @@ void PlyPublisher::initialize()
   else
   {
     Duration(1.0).sleep(); // Need this to get things ready before publishing.
-    if (!publish()) ROS_ERROR("Something went wrong when trying to read and publish the ply file.");
+    if (!publish()) ROS_ERROR("Something went wrong when trying to read and publish the point cloud file.");
     ros::requestShutdown();
   }
 }
@@ -94,13 +94,18 @@ bool PlyPublisher::readFile(const std::string& filePath, const std::string& poin
     // Define PointCloud2 message.
     toROSMsg(pointCloud, *pointCloudMessage_);
   }
-  if (filePath.find(".vtk") != std::string::npos) {
+  else if (filePath.find(".vtk") != std::string::npos) {
     // Load .vtk file.
     PolygonMesh polygonMesh;
     loadPolygonFileVTK(filePath, polygonMesh);
 
     // Define PointCloud2 message.
     moveFromPCL(polygonMesh.cloud, *pointCloudMessage_);
+  }
+  else
+  {
+    ROS_ERROR_STREAM("Data format not supported.");
+    return false;
   }
 
   pointCloudMessage_->header.frame_id = pointCloudFrameId;
@@ -111,13 +116,13 @@ bool PlyPublisher::readFile(const std::string& filePath, const std::string& poin
 
 void PlyPublisher::timerCallback(const ros::TimerEvent& timerEvent)
 {
-  if (!publish()) ROS_ERROR("Something went wrong when trying to read and publish the ply file.");
+  if (!publish()) ROS_ERROR("Something went wrong when trying to read and publish the point cloud file.");
 }
 
 bool PlyPublisher::publish()
 {
   pointCloudMessage_->header.stamp = Time::now();
-  if(pointCloudPublisher_.getNumSubscribers() > 0u)
+  if (pointCloudPublisher_.getNumSubscribers() > 0u)
   {
     pointCloudPublisher_.publish(pointCloudMessage_);
     ROS_INFO_STREAM("Point cloud published in topic \"" << pointCloudTopic_ << "\".");
