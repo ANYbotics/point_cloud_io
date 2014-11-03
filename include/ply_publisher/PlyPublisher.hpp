@@ -73,8 +73,8 @@ class PlyPublisher
   //! Timer for publishing the point cloud.
   ros::Timer timer_;
 
-  //! Path to the .ply file.
-  std::string plyFilePath_;
+  //! Path to the point cloud file.
+  std::string filePath_;
 
   //! Point cloud topic to be published at.
   std::string pointCloudTopic_;
