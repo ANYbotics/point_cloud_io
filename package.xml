@@ -8,6 +8,7 @@
   <url type="website">http://github.com/ethz-asl/ply_publisher</url>
   <url type="bugtracker">http://github.com/ethz-asl/ply_publisher/issues</url>
   <author email="pfankhauser@ethz.ch">Peter Fankhauser</author>
+  <author email="diethelm@mavt.ethz.ch">Remo Diethelm</author>
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>pcl_ros</build_depend>
