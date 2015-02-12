@@ -61,7 +61,8 @@ bool PlyPublisher::readParameters()
   if (!allParametersRead)
   {
     ROS_WARN("Could not read all parameters. Typical command-line usage:\n rosrun ply_publisher ply_publisher"
-        " _file_path:=path_to_your_point_cloud_file _topic:=your_topic _frame:=/point_cloud_frame");
+        " _file_path:=path_to_your_point_cloud_file _topic:=/your_topic _frame:=point_cloud_frame"
+        " (optional) _rate:=publishing_rate");
     return false;
   }
 
