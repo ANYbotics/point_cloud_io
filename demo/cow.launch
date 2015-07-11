@@ -1,0 +1,12 @@
+<launch>
+	
+  <node pkg="ply_publisher" type="ply_publisher" name="ply_publisher" output="screen">
+    <param name="file_path" value="$(find ply_publisher)/demo/cow.ply" />
+    <param name="topic" value="/point_cloud" />
+    <param name="frame" value="/map" />
+    <param name="rate" value="1.0" />
+  </node>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ply_publisher)/demo/ply_publisher.rviz" />
+
+</launch>
