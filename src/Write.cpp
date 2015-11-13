@@ -69,7 +69,7 @@ bool Write::readParameters()
 void Write::pointCloudCallback(const sensor_msgs::PointCloud2ConstPtr& cloud)
 {
   ROS_INFO_STREAM("Received point cloud with " << cloud->height*cloud->width << " points.");
-
+std::cout << folderPath_ << std::endl;
   stringstream filePath;
   filePath << folderPath_ << "/";
   if (!filePrefix_.empty()) {
@@ -97,7 +97,10 @@ void Write::pointCloudCallback(const sensor_msgs::PointCloud2ConstPtr& cloud)
     fromROSMsg(*cloud, pclCloud);
 
     PLYWriter writer;
-    writer.write(filePath.str(), pclCloud);
+    if (writer.write(filePath.str(), pclCloud) != 0) {
+      ROS_ERROR("Something went wrong when trying to write the point cloud file.");
+      return;
+    }
   }
   else {
     ROS_ERROR_STREAM("Data format not supported.");

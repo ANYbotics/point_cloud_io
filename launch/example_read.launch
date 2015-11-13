@@ -1,12 +1,14 @@
 <launch>
   
+  <!-- Publish point cloud from file -->
   <node pkg="point_cloud_io" type="read" name="read" output="screen">
-    <param name="file_path" value="/home/user/your_point_cloud.ply" />
-    <param name="topic"     value="/my_topic" />
-    <param name="frame"     value="sensor_frame" />
+    <param name="file_path" value="$(find point_cloud_io)/example/cow.ply" />
+    <param name="topic"     value="/point_cloud" />
+    <param name="frame"     value="lawn" />
     <param name="rate"      value="1.0" />
   </node>
     
-  <node pkg="tf" type="static_transform_publisher" name="ground_truth_map_transform_publisher" args="0.0 0.0 0.0 0.0 0.0 0.0 world sensor_frame 50" />
+  <!-- Visualize the point cloud in rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find point_cloud_io)/example/point_cloud_io.rviz" />
     
 </launch>
