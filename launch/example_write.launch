@@ -1,0 +1,14 @@
+<launch>
+  
+  <node pkg="point_cloud_io" type="write" name="write" output="screen">
+    <param name="topic"                  value="/my_topic" />
+    <param name="folder_path"            value="/home/user/my_point_clouds" />
+    <param name="file_prefix"            value="my_cloud" />
+    <param name="file_ending"            value="ply" />
+    <param name="add_counter_to_path"    value="true" />
+    <param name="add_frame_id_to_path"   value="true" />
+    <param name="add_stamp_sec_to_path"  value="true" />
+    <param name="add_stamp_nsec_to_path" value="true" />
+  </node>
+    
+</launch>

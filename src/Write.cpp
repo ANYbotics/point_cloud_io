@@ -28,6 +28,7 @@ Write::Write(ros::NodeHandle& nodeHandle)
 {
   if (!readParameters()) ros::requestShutdown();
   pointCloudSubscriber_ = nodeHandle_.subscribe(pointCloudTopic_, 1, &Write::pointCloudCallback, this);
+  ROS_INFO_STREAM("Subscribed to topic \"" << pointCloudTopic_ << "\".");
 }
 
 Write::~Write()
@@ -51,8 +52,8 @@ bool Write::readParameters()
   {
     ROS_WARN("Could not read all parameters. Typical command-line usage:\n"
         "rosrun point_cloud_io write"
-        " _topic:=/your_topic"
-        " _folder_path:=path_to_your_point_clouds_folder"
+        " _topic:=/my_topic"
+        " _folder_path:=/home/user/my_point_clouds"
         " (optional: _file_prefix:=my_prefix"
                    " _file_ending:=my_ending"
                    " _add_counter_to_path:=true/false"

@@ -62,9 +62,9 @@ bool Read::readParameters()
   {
     ROS_WARN("Could not read all parameters. Typical command-line usage:\n"
         "rosrun point_cloud_io read"
-        " _file_path:=path_to_your_point_cloud_file"
-        " _topic:=/your_topic"
-        " _frame:=point_cloud_frame"
+        " _file_path:=/home/user/my_point_cloud.ply"
+        " _topic:=/my_topic"
+        " _frame:=sensor_frame"
         " (optional: _rate:=publishing_rate)");
     return false;
   }
@@ -128,7 +128,7 @@ bool Read::publish()
   if (pointCloudPublisher_.getNumSubscribers() > 0u)
   {
     pointCloudPublisher_.publish(pointCloudMessage_);
-    ROS_INFO_STREAM("Point cloud published in topic \"" << pointCloudTopic_ << "\".");
+    ROS_INFO_STREAM("Point cloud published to topic \"" << pointCloudTopic_ << "\".");
   }
   return true;
 }
