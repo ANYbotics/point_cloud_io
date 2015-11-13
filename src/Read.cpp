@@ -1,12 +1,12 @@
 /*
- * PlyPublisher.cpp
+ * Read.cpp
  *
  *  Created on: Aug 7, 2013
  *      Author: Péter Fankhauser
  *   Institute: ETH Zurich, Autonomous Systems Lab
  */
 
-#include "ply_publisher/PlyPublisher.hpp"
+#include "point_cloud_io/Read.hpp"
 
 //PCL
 #include <pcl/point_cloud.h>
@@ -23,9 +23,9 @@ using namespace pcl;
 using namespace pcl::io;
 using namespace pcl_conversions;
 
-namespace ply_publisher {
+namespace point_cloud_io {
 
-PlyPublisher::PlyPublisher(ros::NodeHandle& nodeHandle)
+Read::Read(ros::NodeHandle& nodeHandle)
     : nodeHandle_(nodeHandle),
       pointCloudMessage_(new sensor_msgs::PointCloud2)
 {
@@ -34,12 +34,12 @@ PlyPublisher::PlyPublisher(ros::NodeHandle& nodeHandle)
   initialize();
 }
 
-PlyPublisher::~PlyPublisher()
+Read::~Read()
 {
 
 }
 
-bool PlyPublisher::readParameters()
+bool Read::readParameters()
 {
   bool allParametersRead = true;
   if (!nodeHandle_.getParam("file_path", filePath_)) allParametersRead = false;
@@ -60,22 +60,25 @@ bool PlyPublisher::readParameters()
 
   if (!allParametersRead)
   {
-    ROS_WARN("Could not read all parameters. Typical command-line usage:\n rosrun ply_publisher ply_publisher"
-        " _file_path:=path_to_your_point_cloud_file _topic:=/your_topic _frame:=point_cloud_frame"
-        " (optional) _rate:=publishing_rate");
+    ROS_WARN("Could not read all parameters. Typical command-line usage:\n"
+        "rosrun point_cloud_io read"
+        " _file_path:=path_to_your_point_cloud_file"
+        " _topic:=/your_topic"
+        " _frame:=point_cloud_frame"
+        " (optional: _rate:=publishing_rate)");
     return false;
   }
 
   return true;
 }
 
-void PlyPublisher::initialize()
+void Read::initialize()
 {
   if (!readFile(filePath_, pointCloudFrameId_)) ros::requestShutdown();
 
   if (isContinousPublishing_)
   {
-    timer_ = nodeHandle_.createTimer(updateDuration_, &PlyPublisher::timerCallback, this);
+    timer_ = nodeHandle_.createTimer(updateDuration_, &Read::timerCallback, this);
   }
   else
   {
@@ -85,7 +88,7 @@ void PlyPublisher::initialize()
   }
 }
 
-bool PlyPublisher::readFile(const std::string& filePath, const std::string& pointCloudFrameId)
+bool Read::readFile(const std::string& filePath, const std::string& pointCloudFrameId)
 {
   if (filePath.find(".ply") != std::string::npos) {
     // Load .ply file.
@@ -103,24 +106,23 @@ bool PlyPublisher::readFile(const std::string& filePath, const std::string& poin
     // Define PointCloud2 message.
     moveFromPCL(polygonMesh.cloud, *pointCloudMessage_);
   }
-  else
-  {
+  else {
     ROS_ERROR_STREAM("Data format not supported.");
     return false;
   }
 
   pointCloudMessage_->header.frame_id = pointCloudFrameId;
 
-  ROS_INFO_STREAM("Loaded point cloud with " << pointCloudMessage_->width << " points.");
+  ROS_INFO_STREAM("Loaded point cloud with " << pointCloudMessage_->height*pointCloudMessage_->width << " points.");
   return true;
 }
 
-void PlyPublisher::timerCallback(const ros::TimerEvent& timerEvent)
+void Read::timerCallback(const ros::TimerEvent& timerEvent)
 {
   if (!publish()) ROS_ERROR("Something went wrong when trying to read and publish the point cloud file.");
 }
 
-bool PlyPublisher::publish()
+bool Read::publish()
 {
   pointCloudMessage_->header.stamp = Time::now();
   if (pointCloudPublisher_.getNumSubscribers() > 0u)

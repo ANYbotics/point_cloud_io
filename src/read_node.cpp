@@ -1,5 +1,5 @@
 /*
- * ply_publisher_node.cpp
+ * read_node.cpp
  *
  *  Created on: Aug 7, 2014
  *      Author: Péter Fankhauser
@@ -7,14 +7,14 @@
  */
 
 #include <ros/ros.h>
-#include "ply_publisher/PlyPublisher.hpp"
+#include "point_cloud_io/Read.hpp"
 
 int main(int argc, char** argv)
 {
-  ros::init(argc, argv, "ply_publisher");
+  ros::init(argc, argv, "read");
   ros::NodeHandle nodeHandle("~");
 
-  ply_publisher::PlyPublisher plyPublisher(nodeHandle);
+  point_cloud_io::Read read(nodeHandle);
 
   ros::spin();
   return 0;

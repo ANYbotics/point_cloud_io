@@ -1,5 +1,5 @@
 /*
- * PlyPublisher.hpp
+ * Read.hpp
  *
  *  Created on: Aug 7, 2013
  *      Author: Péter Fankhauser
@@ -12,38 +12,23 @@
 #include <ros/ros.h>
 #include <sensor_msgs/PointCloud2.h>
 
-namespace ply_publisher {
+namespace point_cloud_io {
 
-class PlyPublisher
+class Read
 {
  public:
   /*!
    * Constructor.
    * @param nodeHandle the ROS node handle.
    */
-  PlyPublisher(ros::NodeHandle& nodeHandle);
+  Read(ros::NodeHandle& nodeHandle);
 
   /*!
    * Destructor.
    */
-  virtual ~PlyPublisher();
-
-  /*!
-   * Read the point cloud from a .ply file.
-   * @param filePath the path to the .ply file.
-   * @param pointCloudFrameId the id of the frame of the point cloud data.
-   * @return true if successful.
-   */
-  bool readFile(const std::string& filePath, const std::string& pointCloudFrameId);
-
-  /*!
-   * Publish the point cloud as a PointCloud2.
-   * @return true if successful.
-   */
-  bool publish();
+  virtual ~Read();
 
  private:
-
   /*!
    * Reads and verifies the ROS parameters.
    * @return true if successful.
@@ -56,12 +41,26 @@ class PlyPublisher
   void initialize();
 
   /*!
+   * Read the point cloud from a .ply or .vtk file.
+   * @param filePath the path to the .ply or .vtk file.
+   * @param pointCloudFrameId the id of the frame of the point cloud data.
+   * @return true if successful.
+   */
+  bool readFile(const std::string& filePath, const std::string& pointCloudFrameId);
+
+  /*!
    * Timer callback function.
    * @param timerEvent the timer event.
    */
   void timerCallback(const ros::TimerEvent& timerEvent);
 
-  //! ROS nodehandle.
+  /*!
+   * Publish the point cloud as a PointCloud2.
+   * @return true if successful.
+   */
+  bool publish();
+
+  //! ROS node handle.
   ros::NodeHandle& nodeHandle_;
 
   //! Point cloud message to publish.

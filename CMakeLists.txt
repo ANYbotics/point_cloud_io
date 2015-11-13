@@ -1,13 +1,14 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(ply_publisher)
+project(point_cloud_io)
 
 set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
 
 ## Find catkin macros and libraries
-find_package(catkin REQUIRED COMPONENTS
-  pcl_ros
-  roscpp
-  sensor_msgs
+find_package(catkin REQUIRED
+  COMPONENTS
+    pcl_ros
+    roscpp
+    sensor_msgs
 )
 
 ###################################
@@ -20,9 +21,13 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-    INCLUDE_DIRS include
+  INCLUDE_DIRS
+    include
 #  LIBRARIES
-    CATKIN_DEPENDS sensor_msgs
+  CATKIN_DEPENDS
+    pcl_ros
+    roscpp
+    sensor_msgs
 #  DEPENDS
 )
 
@@ -37,15 +42,24 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-## Declare a cpp executable
+## Declare cpp executables
 add_executable(
-  ${PROJECT_NAME}
-  src/ply_publisher_node.cpp
-  src/PlyPublisher.cpp
+  read
+  src/read_node.cpp
+  src/Read.cpp
+)
+add_executable(
+  write
+  src/write_node.cpp
+  src/Write.cpp
 )
 
-## Specify libraries to link a library or executable target against
+## Specify libraries to link executable targets against
 target_link_libraries(
-  ${PROJECT_NAME}
+  read
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(
+  write
   ${catkin_LIBRARIES}
 )
