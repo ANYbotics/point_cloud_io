@@ -92,7 +92,7 @@ bool Read::readFile(const std::string& filePath, const std::string& pointCloudFr
 {
   if (filePath.find(".ply") != std::string::npos) {
     // Load .ply file.
-    PointCloud<PointXYZINormal> pointCloud;
+    PointCloud<PointXYZRGBNormal> pointCloud;
     if (loadPLYFile(filePath, pointCloud) != 0) return false;
 
     // Define PointCloud2 message.

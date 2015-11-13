@@ -93,7 +93,7 @@ void Write::pointCloudCallback(const sensor_msgs::PointCloud2ConstPtr& cloud)
 
   if (fileEnding_ == "ply") {
     // Write .ply file.
-    PointCloud<PointXYZINormal> pclCloud;
+    PointCloud<PointXYZRGBNormal> pclCloud;
     fromROSMsg(*cloud, pclCloud);
 
     PLYWriter writer;
