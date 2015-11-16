@@ -60,10 +60,10 @@ Optionally, you can set parameters to fit the point cloud file names to your nee
 
 - `_file_prefix:=my_prefix` (default: "point_cloud")
 - `_file_ending:=my_ending` (default: "ply", currently only format which is supported for writing)
-- `_add_counter_to_path:=false` (default: 'true')
-- `_add_frame_id_to_path:=true` (default: 'false')
-- `_add_stamp_sec_to_path:=true` (default: 'false')
-- `_add_stamp_nsec_to_path:=true` (default: 'false')
+- `_add_counter_to_path:=false` (default: `true`)
+- `_add_frame_id_to_path:=true` (default: `false`)
+- `_add_stamp_sec_to_path:=true` (default: `false`)
+- `_add_stamp_nsec_to_path:=true` (default: `false`)
 
 
 Bugs & Feature Requests
