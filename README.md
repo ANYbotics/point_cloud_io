@@ -10,7 +10,8 @@ For visualization, make sure to set the **Decay Time** in the **PointCloud2** ta
 
 The point cloud io package has been tested under ROS Indigo and Ubuntu 14.04. This is research code, expect that it changes often and any fitness for a particular purpose is disclaimed.
 
-**Authors: Peter Fankhauser, pfankhauser@ethz.ch, Remo Diethelm, diethelm@mavt.ethz.ch<br />
+**Authors: Peter Fankhauser, Remo Diethelm<br />
+Contact: Peter Fankhauser, pfankhauser@ethz.ch<br />
 Affiliation: Autonomous Systems Lab, ETH Zurich**
 
 
