@@ -1,16 +1,17 @@
-ply Publisher
+Point Cloud IO
 ======================
 
 Overview
 ---------------
 
-This is a simple [ROS] node to read a point cloud from a .ply file and to publish it as a [sensor_msgs/PointCloud2] message. It is meant to be used to visualize reference point clouds in [rviz].
+These are two simple [ROS] point cloud helper nodes. **read** reads a point cloud from file (ply or vtk) and publishes it as a [sensor_msgs/PointCloud2] message. **write** subscribes to a [sensor_msgs/PointCloud2] topic and writes received messages to seperate files (ply).
 
-Make sure to set the **Decay Time** in the **PointCloud2** tab in [rviz] to a high number to get the point cloud visible for a long time.
+For visualization, make sure to set the **Decay Time** in the **PointCloud2** tab in [rviz] to a high number to get the point cloud visible for a long time.
 
-The ply Publisher has been tested under ROS Indigo and Ubuntu 14.04. This is research code, expect that it changes often and any fitness for a particular purpose is disclaimed.
+The point cloud io package has been tested under ROS Indigo and Ubuntu 14.04. This is research code, expect that it changes often and any fitness for a particular purpose is disclaimed.
 
-**Author: Peter Fankhauser, pfankhauser@ethz.ch<br />
+**Authors: Peter Fankhauser, Remo Diethelm<br />
+Contact: Peter Fankhauser, pfankhauser@ethz.ch<br />
 Affiliation: Autonomous Systems Lab, ETH Zurich**
 
 
@@ -26,10 +27,10 @@ This software is built on the Robotic Operating System ([ROS]), which needs to b
 
 ### Building
 
-In order to install the ply Publisher, clone the latest version from this repository into your catkin workspace and compile the package using ROS.
+In order to install the Point Cloud IO, clone the latest version from this repository into your catkin workspace and compile the package using ROS.
 
-    cd catkin_workspace/src
-    git clone https://github.com/ethz-asl/ply_publisher.git
+    cd ~/catkin_workspace/src
+    git clone https://github.com/ethz-asl/point_cloud_io.git
     cd ../
     catkin_make
 
@@ -37,17 +38,38 @@ In order to install the ply Publisher, clone the latest version from this reposi
 Usage
 ------------
 
-Load and publish a .ply file with
+To create your own launch-file, you can use the examples from `point_cloud_io/launch/...`.
 
-    rosrun ply_publisher ply_publisher _file_path:=/home/user/your_point_cloud.ply _topic:=/point_cloud _frame:=/sensor_frame
 
-Optionally, you can also add `_rate:=1.0` to have the node publish your point cloud at the specified rate. To create your own launch-file, you can use the example from `ply_publisher/launch/example.launch`.
+### Read
+
+Load and publish a ply or vtk file with
+
+    rosrun point_cloud_io read _file_path:=/home/user/my_point_cloud.ply _topic:=/my_topic _frame:=/sensor_frame
+
+Optionally, you can also add `_rate:=1.0` to have the node publish your point cloud at the specified rate.
+
+
+### Write
+
+Subscribe and save point clouds to a ply file with
+
+    rosrun point_cloud_io write _topic:=/your_topic _folder_path:=/home/user/my_point_clouds
+    
+Optionally, you can set parameters to fit the point cloud file names to your needs: 
+
+- `_file_prefix:=my_prefix` (default: "point_cloud")
+- `_file_ending:=my_ending` (default: "ply", currently only format which is supported for writing)
+- `_add_counter_to_path:=false` (default: 'true')
+- `_add_frame_id_to_path:=true` (default: 'false')
+- `_add_stamp_sec_to_path:=true` (default: 'false')
+- `_add_stamp_nsec_to_path:=true` (default: 'false')
 
 
 Bugs & Feature Requests
 ------------
 
-Please report bugs and request features using the [Issue Tracker](https://github.com/ethz-asl/ply_publisher/issues).
+Please report bugs and request features using the [Issue Tracker](https://github.com/ethz-asl/point_cloud_io/issues).
 
 
 [ROS]: http://www.ros.org
