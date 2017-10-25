@@ -14,7 +14,7 @@ The point cloud io package has been tested under ROS Indigo and Ubuntu 14.04. Th
 Contact: Peter Fankhauser, pfankhauser@ethz.ch<br />
 Affiliation: Autonomous Systems Lab, ETH Zurich**
 
-[![Build Status](http://rsl-ci.ethz.ch/buildStatus/icon?job=point_cloud_io)](http://rsl-ci.ethz.ch/job/point_cloud_io/)
+[![Build Status](https://ci.leggedrobotics.com/buildStatus/icon?job=github_ethz-asl/point_cloud_io/master)](https://ci.leggedrobotics.com/job/github_ethz-asl/job/point_cloud_io/job/master/)
 
 Installation
 ------------
