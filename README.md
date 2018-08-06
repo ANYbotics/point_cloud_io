@@ -8,11 +8,15 @@ These are two simple [ROS] point cloud helper nodes. **_read_** reads a point cl
 
 For visualization, make sure to set the **Decay Time** in the **PointCloud2** tab in [rviz] to a high number to get the point cloud visible for a long time.
 
-The point cloud io package has been tested under ROS Indigo and Ubuntu 14.04. This is research code, expect that it changes often and any fitness for a particular purpose is disclaimed.
+The point cloud io package has been tested under ROS Kinetic and Ubuntu 16.04. This is research code, expect that it changes often and any fitness for a particular purpose is disclaimed.
 
-**Authors: Peter Fankhauser, Remo Diethelm<br />
-Contact: Peter Fankhauser, pfankhauser@ethz.ch<br />
-Affiliation: Autonomous Systems Lab, ETH Zurich**
+**Author: Péter Fankhauser, Remo Diethelm<br />
+Affiliation: [ANYbotics](https://www.anybotics.com/)<br />
+Maintainer: Remo Diethelm, rdiethelm@anybotics.com<br />**
+
+This projected was initially developed at ETH Zurich (Autonomous Systems Lab & Robotic Systems Lab).
+
+[This work is conducted as part of ANYmal Research, a community to advance legged robotics.](https://www.anymal-research.org/)
 
 [![Build Status](https://ci.leggedrobotics.com/buildStatus/icon?job=github_ethz-asl/point_cloud_io/master)](https://ci.leggedrobotics.com/job/github_ethz-asl/job/point_cloud_io/job/master/)
 
@@ -31,7 +35,7 @@ This software is built on the Robotic Operating System ([ROS]), which needs to b
 In order to install the Point Cloud IO, clone the latest version from this repository into your catkin workspace and compile the package using ROS.
 
     cd ~/catkin_workspace/src
-    git clone https://github.com/ethz-asl/point_cloud_io.git
+    git clone https://github.com/anybotics/point_cloud_io.git
     cd ../
     catkin_make
 
@@ -70,7 +74,7 @@ Optionally, you can set parameters to fit the point cloud file names to your nee
 Bugs & Feature Requests
 ------------
 
-Please report bugs and request features using the [Issue Tracker](https://github.com/ethz-asl/point_cloud_io/issues).
+Please report bugs and request features using the [Issue Tracker](https://github.com/anybotics/point_cloud_io/issues).
 
 
 [ROS]: http://www.ros.org
