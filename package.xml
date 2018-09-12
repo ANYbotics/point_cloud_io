@@ -3,11 +3,11 @@
   <name>point_cloud_io</name>
   <version>0.1.0</version>
   <description>Tools to either read and publish or subscribe and write PointCloud2 messages.</description>
-  <maintainer email="pfankhauser@ethz.ch">Peter Fankhauser</maintainer>
+  <maintainer email="pfankhauser@anybotics.com">Peter Fankhauser</maintainer>
   <license>MIT</license>
   <url type="website">http://github.com/ethz-asl/point_cloud_io</url>
   <url type="bugtracker">http://github.com/ethz-asl/point_cloud_io/issues</url>
-  <author email="pfankhauser@ethz.ch">Peter Fankhauser</author>
+  <author email="pfankhauser@anybotics.com">Peter Fankhauser</author>
   <author email="diethelm@mavt.ethz.ch">Remo Diethelm</author>
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roscpp</build_depend>
