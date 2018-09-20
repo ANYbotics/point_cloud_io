@@ -25,5 +25,5 @@
 .project
 .settings
 
-# Written files by the example
+# Files written by the example
 examples/received_cloud_*
