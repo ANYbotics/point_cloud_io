@@ -24,3 +24,6 @@
 .cproject
 .project
 .settings
+
+# Files written by the example
+examples/received_cloud_*
