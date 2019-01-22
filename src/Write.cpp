@@ -97,7 +97,9 @@ std::cout << folderPath_ << std::endl;
     fromROSMsg(*cloud, pclCloud);
 
     PLYWriter writer;
-    if (writer.write(filePath.str(), pclCloud) != 0) {
+    bool binary = false;
+    bool use_camera = false;
+    if (writer.write(filePath.str(), pclCloud, binary, use_camera) != 0) {
       ROS_ERROR("Something went wrong when trying to write the point cloud file.");
       return;
     }
