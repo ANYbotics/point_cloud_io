@@ -8,7 +8,7 @@ These are two simple [ROS] point cloud helper nodes. **_read_** reads a point cl
 
 For visualization, make sure to set the **Decay Time** in the **PointCloud2** tab in [rviz] to a high number to get the point cloud visible for a long time.
 
-The point cloud io package has been tested under ROS Kinetic and Ubuntu 16.04. This is research code, expect that it changes often and any fitness for a particular purpose is disclaimed.
+The point cloud io package has been tested under ROS Melodic and Ubuntu 18.04. This is research code, expect that it changes often and any fitness for a particular purpose is disclaimed.
 
 **Author: Péter Fankhauser, Remo Diethelm<br />
 Affiliation: [ANYbotics](https://www.anybotics.com/)<br />
@@ -60,8 +60,8 @@ Optionally, you can also add `_rate:=1.0` to have the node publish your point cl
 Subscribe and save point clouds to a ply file with
 
     rosrun point_cloud_io write _topic:=/your_topic _folder_path:=/home/user/my_point_clouds
-    
-Optionally, you can set parameters to fit the point cloud file names to your needs: 
+
+Optionally, you can set parameters to fit the point cloud file names to your needs:
 
 - `_file_prefix:=my_prefix` (default: "point_cloud")
 - `_file_ending:=my_ending` (default: "ply", currently only format which is supported for writing)
