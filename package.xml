@@ -8,7 +8,7 @@
   <url type="website">http://github.com/ethz-asl/point_cloud_io</url>
   <url type="bugtracker">http://github.com/ethz-asl/point_cloud_io/issues</url>
   <author email="pfankhauser@anybotics.com">Peter Fankhauser</author>
-  <author email="diethelm@mavt.ethz.ch">Remo Diethelm</author>
+  <author email="rdiethelm@anybotics.com">Remo Diethelm</author>
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>pcl_ros</build_depend>
