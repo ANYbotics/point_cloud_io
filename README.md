@@ -4,7 +4,7 @@ Point Cloud IO
 Overview
 ---------------
 
-These are two simple [ROS] point cloud helper nodes. **_read_** reads a point cloud from file (ply or vtk) and publishes it as a [sensor_msgs/PointCloud2] message. **_write_** subscribes to a [sensor_msgs/PointCloud2] topic and writes received messages to seperate files (ply).
+These are two simple [ROS] point cloud helper nodes. **_read_** reads a point cloud from file (ply or vtk) and publishes it as a [sensor_msgs/PointCloud2] message. **_write_** subscribes to a [sensor_msgs/PointCloud2] topic and writes received messages to seperate files (ply, pcd).
 
 For visualization, make sure to set the **Decay Time** in the **PointCloud2** tab in [rviz] to a high number to get the point cloud visible for a long time.
 
