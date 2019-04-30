@@ -109,7 +109,7 @@ std::cout << folderPath_ << std::endl;
     //Write pcd file
     PointCloud<PointXYZRGBNormal> pclCloud;
     fromROSMsg(*cloud, pclCloud);
-    pcl::io::savePCDFile (filePath.str(),pclCloud);
+    savePCDFile (filePath.str(), pclCloud);
   }
   else {
     ROS_ERROR_STREAM("Data format not supported.");
