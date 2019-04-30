@@ -12,6 +12,7 @@
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
 #include <pcl/io/ply_io.h>
+#include <pcl/io/pcd_io.h>
 #include <pcl_conversions/pcl_conversions.h>
 
 using namespace std;
@@ -103,6 +104,12 @@ std::cout << folderPath_ << std::endl;
       ROS_ERROR("Something went wrong when trying to write the point cloud file.");
       return;
     }
+  }
+  else if(fileEnding_ == "pcd"){
+    //Write pcd file
+    PointCloud<PointXYZRGBNormal> pclCloud;
+    fromROSMsg(*cloud, pclCloud);
+    savePCDFile (filePath.str(), pclCloud);
   }
   else {
     ROS_ERROR_STREAM("Data format not supported.");
