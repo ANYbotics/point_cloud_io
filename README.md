@@ -18,6 +18,8 @@ This projected was initially developed at ETH Zurich (Autonomous Systems Lab & R
 
 [This work is conducted as part of ANYmal Research, a community to advance legged robotics.](https://www.anymal-research.org/)
 
+The source code is released under a [BSD 3-Clause license](LICENSE).
+
 [![Build Status](https://ci.leggedrobotics.com/buildStatus/icon?job=github_anybotics/point_cloud_io/master)](https://ci.leggedrobotics.com/job/github_anybotics/job/point_cloud_io/job/master/)
 
 Installation
