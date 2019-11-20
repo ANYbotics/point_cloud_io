@@ -14,19 +14,18 @@
 
 namespace point_cloud_io {
 
-class Read
-{
+class Read {
  public:
   /*!
    * Constructor.
    * @param nodeHandle the ROS node handle.
    */
-  Read(ros::NodeHandle& nodeHandle);
+  explicit Read(ros::NodeHandle& nodeHandle);
 
   /*!
    * Destructor.
    */
-  virtual ~Read();
+  virtual ~Read() = default;
 
  private:
   /*!
@@ -81,12 +80,14 @@ class Read
   //! Point cloud frame id.
   std::string pointCloudFrameId_;
 
-  //! If true, continous publishing is used.
-  //! If false, point cloud is only published once.
-  bool isContinousPublishing_;
+  /*!
+   * If true, continuous publishing is used.
+   * If false, point cloud is only published once.
+   */
+  bool isContinuouslyPublishing_ = false;
 
   //! Duration between publishing steps.
   ros::Duration updateDuration_;
 };
 
-} /* namespace */
+}  // namespace point_cloud_io

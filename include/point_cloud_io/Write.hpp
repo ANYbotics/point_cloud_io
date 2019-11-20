@@ -14,19 +14,18 @@
 
 namespace point_cloud_io {
 
-class Write
-{
+class Write {
  public:
   /*!
    * Constructor.
    * @param nodeHandle the ROS node handle.
    */
-  Write(ros::NodeHandle& nodeHandle);
+  explicit Write(ros::NodeHandle& nodeHandle);
 
   /*!
    * Destructor.
    */
-  virtual ~Write();
+  virtual ~Write() = default;
 
  private:
   /*!
@@ -69,4 +68,4 @@ class Write
   bool addStampNSecToPath_ = false;
 };
 
-} /* namespace */
+}  // namespace point_cloud_io

@@ -1,66 +1,75 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5.1)
 project(point_cloud_io)
 
-## Use C++11
-add_definitions(--std=c++11)
+set(CMAKE_CXX_STANDARD 11)
+add_compile_options(-Wall -Wextra -Wpedantic)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-## Find catkin macros and libraries
-find_package(catkin REQUIRED
-  COMPONENTS
-    pcl_ros
-    roscpp
-    sensor_msgs
+set(CATKIN_PACKAGE_DEPENDENCIES
+  pcl_ros
+  roscpp
+  sensor_msgs
 )
 
-###################################
-## catkin specific configuration ##
-###################################
-## The catkin_package macro generates cmake config files for your package
-## Declare things to be passed to dependent projects
-## INCLUDE_DIRS: uncomment this if you package contains header files
-## LIBRARIES: libraries you create in this project that dependent projects also need
-## CATKIN_DEPENDS: catkin_packages dependent projects also need
-## DEPENDS: system dependencies of this project that dependent projects also need
+find_package(catkin REQUIRED
+  COMPONENTS
+    ${CATKIN_PACKAGE_DEPENDENCIES}
+)
+
 catkin_package(
   INCLUDE_DIRS
     include
-#  LIBRARIES
   CATKIN_DEPENDS
-    pcl_ros
-    roscpp
-    sensor_msgs
-#  DEPENDS
+    ${CATKIN_PACKAGE_DEPENDENCIES}
 )
 
-###########
-## Build ##
-###########
-
-## Specify additional locations of header files
-## Your package locations should be listed before other locations
 include_directories(
   include
-  ${catkin_INCLUDE_DIRS}
+  SYSTEM
+    ${catkin_INCLUDE_DIRS}
 )
 
-## Declare cpp executables
-add_executable(
-  read
+add_executable(read
   src/read_node.cpp
   src/Read.cpp
 )
-add_executable(
-  write
+target_link_libraries(read
+  ${catkin_LIBRARIES}
+)
+
+add_executable(write
   src/write_node.cpp
   src/Write.cpp
 )
+target_link_libraries(write
+  ${catkin_LIBRARIES}
+)
 
-## Specify libraries to link executable targets against
-target_link_libraries(
-  read
-  ${catkin_LIBRARIES}
+install(
+  TARGETS
+    read
+    write
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
-target_link_libraries(
-  write
-  ${catkin_LIBRARIES}
+install(
+  DIRECTORY
+    include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
+install(
+  DIRECTORY
+    examples
+    launch
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
+find_package(cmake_clang_tools QUIET)
+if(cmake_clang_tools_FOUND)
+  add_default_clang_tooling(
+    TARGETS
+      read
+      write
+  )
+endif(cmake_clang_tools_FOUND)
