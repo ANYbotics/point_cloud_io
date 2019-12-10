@@ -10,6 +10,7 @@
   <author email="pfankhauser@anybotics.com">Peter Fankhauser</author>
   <author email="rdiethelm@anybotics.com">Remo Diethelm</author>
   <maintainer email="rdiethelm@anybotics.com">Remo Diethelm</maintainer>
+  <maintainer email="ynava@anybotics.com">Yoshua Nava</maintainer>
 
   <url type="website">http://github.com/anybotics/point_cloud_io</url>
   <url type="bugtracker">http://github.com/anybotics/point_cloud_io/issues</url>
