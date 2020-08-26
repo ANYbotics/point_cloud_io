@@ -17,10 +17,13 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <build_depend>cmake_clang_tools</build_depend>
+<!--   <build_depend>cmake_clang_tools</build_depend> -->
 
   <depend>roscpp</depend>
   <depend>pcl_ros</depend>
   <depend>sensor_msgs</depend>
+
+<!--   <test_depend>cmake_code_coverage</test_depend> -->
+  <test_depend>gtest</test_depend>
 
 </package>
