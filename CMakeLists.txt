@@ -29,6 +29,9 @@ include_directories(
     ${catkin_INCLUDE_DIRS}
 )
 
+###########
+## Build ##
+###########
 add_executable(read
   src/read_node.cpp
   src/Read.cpp
@@ -45,6 +48,9 @@ target_link_libraries(write
   ${catkin_LIBRARIES}
 )
 
+#############
+## Install ##
+#############
 install(
   TARGETS
     read
@@ -78,23 +84,22 @@ endif(cmake_clang_tools_FOUND)
 ##   Test   ##
 ##############
 if(CATKIN_ENABLE_TESTING)
-  find_package(catkin REQUIRED
-    COMPONENTS
-      ${CATKIN_PACKAGE_DEPENDENCIES}
-  )
-
   catkin_add_gtest(test_${PROJECT_NAME}
     test/empty_test.cpp
   )
-  target_include_directories(test_${PROJECT_NAME}
-    PRIVATE
-      include
-    SYSTEM PUBLIC
-      ${catkin_INCLUDE_DIRS}
+  add_dependencies(test_${PROJECT_NAME}
+    read
+    write
+  )
+  target_include_directories(test_${PROJECT_NAME} PRIVATE
+    include
+  )
+  target_include_directories(test_${PROJECT_NAME} SYSTEM PUBLIC
+    ${catkin_INCLUDE_DIRS}
   )
   target_link_libraries(test_${PROJECT_NAME}
-    ${catkin_LIBRARIES}
     gtest_main
+    ${catkin_LIBRARIES}
   )
 
   ###################
