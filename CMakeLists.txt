@@ -1,9 +1,16 @@
 cmake_minimum_required(VERSION 3.5.1)
 project(point_cloud_io)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 add_compile_options(-Wall -Wextra -Wpedantic)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# Options.
+option(BUILD_WITH_VTK_SUPPORT "Build package with support for VTK files." OFF)
+if(BUILD_WITH_VTK_SUPPORT)
+  message("point_cloud_io will be built with support for VTK files.")
+  add_definitions(-DHAVE_VTK)
+endif()
 
 set(CATKIN_PACKAGE_DEPENDENCIES
   pcl_ros

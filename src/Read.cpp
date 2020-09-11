@@ -13,9 +13,10 @@
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
 #include <pcl_conversions/pcl_conversions.h>
-// define the following in order to eliminate the deprecated headers warning
-#define VTK_EXCLUDE_STRSTREAM_HEADERS
+
+#ifdef HAVE_VTK
 #include <pcl/io/vtk_lib_io.h>
+#endif
 
 namespace point_cloud_io {
 
@@ -82,14 +83,18 @@ bool Read::readFile(const std::string& filePath, const std::string& pointCloudFr
 
     // Define PointCloud2 message.
     pcl::toROSMsg(pointCloud, *pointCloudMessage_);
-  } else if (filePath.find(".vtk") != std::string::npos) {
+  }
+#ifdef HAVE_VTK
+  else if (filePath.find(".vtk") != std::string::npos) {
     // Load .vtk file.
     pcl::PolygonMesh polygonMesh;
     pcl::io::loadPolygonFileVTK(filePath, polygonMesh);
 
     // Define PointCloud2 message.
     pcl_conversions::moveFromPCL(polygonMesh.cloud, *pointCloudMessage_);
-  } else {
+  }
+#endif
+  else {
     ROS_ERROR_STREAM("Data format not supported.");
     return false;
   }

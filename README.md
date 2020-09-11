@@ -25,20 +25,21 @@ Installation
 
 ### Dependencies
 
-This software is built on the Robotic Operating System ([ROS]), which needs to be [installed](http://wiki.ros.org) first. Additionaly, the it depends on following software:
+This software is built on the Robot Operating System ([ROS]), which needs to be [installed](http://wiki.ros.org) first. Additionaly, the it depends on following software:
 
 - [Point Cloud Library (PCL)](http://pointclouds.org/).
 
 
 ### Building
 
-In order to install the Point Cloud IO, clone the latest version from this repository into your catkin workspace and compile the package using ROS.
+In order to build Point Cloud IO, clone the latest version from this repository into your catkin workspace and compile the package using ROS.
 
     cd ~/catkin_workspace/src
     git clone https://github.com/anybotics/point_cloud_io.git
     cd ../
-    catkin_make
+    catkin build point_cloud_io
 
+Note: building the tool with support for the VTK file format is disabled by default. To enable it, run `catkin build point_cloud_io --cmake-args -DBUILD_WITH_VTK_SUPPORT=True` instead.
 
 Usage
 ------------
