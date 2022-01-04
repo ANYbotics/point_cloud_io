@@ -74,7 +74,7 @@ void Read::initialize() {
 }
 
 bool Read::readFile(const std::string& filePath, const std::string& pointCloudFrameId) {
-  if (filePath.find(".ply") != std::string::npos) {
+  if (filePath.substr(filePath.find_last_of(".") + 1) == "ply") {
     // Load .ply file.
     pcl::PointCloud<pcl::PointXYZRGBNormal> pointCloud;
     if (pcl::io::loadPLYFile(filePath, pointCloud) != 0) {
@@ -85,7 +85,7 @@ bool Read::readFile(const std::string& filePath, const std::string& pointCloudFr
     pcl::toROSMsg(pointCloud, *pointCloudMessage_);
   }
 #ifdef HAVE_VTK
-  else if (filePath.find(".vtk") != std::string::npos) {
+  else if (filePath.substr(filePath.find_last_of(".") + 1) == "vtk") {
     // Load .vtk file.
     pcl::PolygonMesh polygonMesh;
     pcl::io::loadPolygonFileVTK(filePath, polygonMesh);
