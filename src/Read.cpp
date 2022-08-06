@@ -8,6 +8,8 @@
 
 #include "point_cloud_io/Read.hpp"
 
+#include <filesystem>
+
 // PCL
 #include <pcl/io/ply_io.h>
 #include <pcl/point_cloud.h>
@@ -74,7 +76,7 @@ void Read::initialize() {
 }
 
 bool Read::readFile(const std::string& filePath, const std::string& pointCloudFrameId) {
-  if (filePath.substr(filePath.find_last_of(".") + 1) == "ply") {
+  if (std::filesystem::path(filePath).extension() == ".ply") {
     // Load .ply file.
     pcl::PointCloud<pcl::PointXYZRGBNormal> pointCloud;
     if (pcl::io::loadPLYFile(filePath, pointCloud) != 0) {
@@ -85,7 +87,7 @@ bool Read::readFile(const std::string& filePath, const std::string& pointCloudFr
     pcl::toROSMsg(pointCloud, *pointCloudMessage_);
   }
 #ifdef HAVE_VTK
-  else if (filePath.substr(filePath.find_last_of(".") + 1) == "vtk") {
+  else if (std::filesystem::path(filePath).extension() == ".vtk") {
     // Load .vtk file.
     pcl::PolygonMesh polygonMesh;
     pcl::io::loadPolygonFileVTK(filePath, polygonMesh);
