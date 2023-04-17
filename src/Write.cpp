@@ -17,7 +17,7 @@
 
 namespace point_cloud_io {
 
-Write::Write(ros::NodeHandle& nodeHandle) : nodeHandle_(nodeHandle), filePrefix_("point_cloud"), fileEnding_("ply") {
+Write::Write(ros::NodeHandle nodeHandle) : nodeHandle_(nodeHandle), filePrefix_("point_cloud"), fileEnding_("ply") {
   if (!readParameters()) {
     ros::requestShutdown();
   }

@@ -22,7 +22,7 @@
 
 namespace point_cloud_io {
 
-Read::Read(ros::NodeHandle& nodeHandle) : nodeHandle_(nodeHandle), pointCloudMessage_(new sensor_msgs::PointCloud2()) {
+Read::Read(ros::NodeHandle nodeHandle) : nodeHandle_(nodeHandle), pointCloudMessage_(new sensor_msgs::PointCloud2()) {
   if (!readParameters()) {
     ros::requestShutdown();
   }

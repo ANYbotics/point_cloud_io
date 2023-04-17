@@ -20,7 +20,7 @@ class Read {
    * Constructor.
    * @param nodeHandle the ROS node handle.
    */
-  explicit Read(ros::NodeHandle& nodeHandle);
+  explicit Read(ros::NodeHandle nodeHandle);
 
   /*!
    * Destructor.
@@ -60,7 +60,7 @@ class Read {
   bool publish();
 
   //! ROS node handle.
-  ros::NodeHandle& nodeHandle_;
+  ros::NodeHandle nodeHandle_;
 
   //! Point cloud message to publish.
   sensor_msgs::PointCloud2::Ptr pointCloudMessage_;

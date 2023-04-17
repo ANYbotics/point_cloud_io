@@ -20,7 +20,7 @@ class Write {
    * Constructor.
    * @param nodeHandle the ROS node handle.
    */
-  explicit Write(ros::NodeHandle& nodeHandle);
+  explicit Write(ros::NodeHandle nodeHandle);
 
   /*!
    * Destructor.
@@ -41,7 +41,7 @@ class Write {
   void pointCloudCallback(const sensor_msgs::PointCloud2ConstPtr& cloud);
 
   //! ROS node handle.
-  ros::NodeHandle& nodeHandle_;
+  ros::NodeHandle nodeHandle_;
 
   //! Point cloud subscriber.
   ros::Subscriber pointCloudSubscriber_;
