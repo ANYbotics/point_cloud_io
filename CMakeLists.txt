@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5.1)
 project(point_cloud_io)
 
 set(CMAKE_CXX_STANDARD 17)
-add_compile_options(-Wall -Wextra -Wpedantic)
+add_compile_options(-Wall -Wextra -Wpedantic -Werror=return-type)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Options.
