@@ -3,7 +3,7 @@
 <package format="2">
 
   <name>point_cloud_io</name>
-  <version>0.3.18</version>
+  <version>0.3.19</version>
   <description>Tools to either read and publish or subscribe and write PointCloud2 messages.</description>
 
   <license>BSD</license>
